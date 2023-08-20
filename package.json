@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "bootstrap": "^5.3.1",
+    "gsap": "^3.12.2",
+    "three": "^0.155.0"
+  },
+  "scripts": {
+    "build": "sass scss:css",
+    "watch": "sass --watch scss:css"
+  },
+  "devDependencies": {
+    "sass": "^1.66.1",
+    "vite": "^4.4.9"
+  }
+}

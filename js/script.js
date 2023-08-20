@@ -1,0 +1,82 @@
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
+
+const canvas = document.querySelector(".webgl");
+const renderer = new THREE.WebGLRenderer({ canvas });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const geometry = new THREE.BoxGeometry(1, 1, 1);
+const material = new THREE.MeshStandardMaterial({
+  color: 0x0069a0,
+  roughness: 0.2,
+  metalness: 0.2,
+});
+const cube = new THREE.Mesh(geometry, material);
+cube.position.set(1, 0, 0);
+scene.add(cube);
+
+// Light
+
+const light = new THREE.AmbientLight(0xffffff, 1000, 0, 2.3);
+light.position.set(0, 0, 15);
+scene.add(light);
+
+// Controls
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.enablePan = false;
+controls.enableZoom = false;
+// controls.autoRotate = true;
+// controls.autoRotateSpeed = 5;
+// controls.dampingFactor = 0.01;
+
+camera.position.z = 5;
+
+function animate() {
+  requestAnimationFrame(animate);
+  cube.rotation.x += 0.01;
+  cube.rotation.y += 0.01;
+  renderer.render(scene, camera);
+}
+animate();
+
+// Arrow
+
+// const renderer = new THREE.WebGLRenderer();
+// renderer.setSize(window.innerWidth, window.innerHeight);
+// document.body.appendChild(renderer.domElement);
+
+// const camera = new THREE.PerspectiveCamera(
+//   45,
+//   window.innerWidth / window.innerHeight,
+//   1,
+//   500
+// );
+// camera.position.set(0, 0, 100);
+// camera.lookAt(0, 0, 0);
+
+// const scene = new THREE.Scene();
+
+// const material = new THREE.LineBasicMaterial({ color: 0x0000ff });
+
+// const points = [];
+// points.push(new THREE.Vector3(-10, 0, 0));
+// points.push(new THREE.Vector3(0, 10, 0));
+// points.push(new THREE.Vector3(10, 0, 0));
+
+// const geometry = new THREE.BufferGeometry().setFromPoints(points);
+
+// const line = new THREE.Line(geometry, material);
+
+// scene.add(line);
+// renderer.render(scene, camera);
