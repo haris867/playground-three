@@ -9,7 +9,7 @@ const scene = new THREE.Scene();
 // Load texture
 
 const myTexture = new THREE.TextureLoader().load(
-  "/images/head5.png",
+  "../images/head5.png",
   function (texture) {
     texture.generateMipmaps = false;
     texture.minFilter = THREE.LinearFilter;
