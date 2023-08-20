@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Poppins:wght@100;300;400;500;600;700&family=Roboto+Mono:wght@400;700&display=swap");
-
 body,
 html {
   height: 100%;
@@ -34,17 +33,27 @@ nav a {
   color: white;
   font-weight: bold;
   font-size: 1.5em;
-  &:hover {
-    text-decoration: underline;
-  }
+  font-family: "Poppins", sans-serif;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+
+nav a li {
+  font-size: 0.7em;
 }
 
 nav ul {
   list-style: none;
   display: flex;
+  flex-direction: column;
   gap: 1rem;
   margin: 0;
   padding: 0;
+}
+
+.active {
+  text-decoration: underline;
 }
 
 .title {
@@ -62,3 +71,5 @@ canvas.webgl {
   height: 100vh;
   background-color: black;
 }
+
+/*# sourceMappingURL=styles.css.map */

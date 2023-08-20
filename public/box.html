@@ -11,24 +11,25 @@
       href="node_modules/bootstrap/dist/css/bootstrap.min.css"
     />
     <link rel="icon" href="/images/head5.png" class="object-fit-contain" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
   </head>
   <body>
-    <!-- <h1>three.js</h1>
-    <img src="/images/head5.png" alt="hey" title="hej på deg" /> -->
-    <canvas class="webgl"></canvas>
     <nav>
       <a href="/index.html" class="align-self-start">Playground</a>
       <ul class="d-flex">
         <!-- <li>Explore</li>
         <li>Create</li>
         <li>Conquer</li> -->
-        <a href="box.html">
+        <a href="box.html" class="active">
           <li>Box #1</li>
         </a>
         <a href="box-test.html">
           <li>Box #2</li>
         </a>
-        <a href="sphere-test.html" class="active">
+        <a href="sphere-test.html">
           <li>Sphere #1</li>
         </a>
         <a href="sphere-test2.html">
@@ -42,8 +43,9 @@
         </a>
       </ul>
     </nav>
-    <h1 class="title">Hej på deg!</h1>
+    <canvas class="webgl"></canvas>
+    <h1 class="title">Spinn meg!</h1>
     <div class="3d-text" style="display: none">Three.js</div>
-    <script type="module" src="/js/sphere-test.js"></script>
+    <script type="module" src="/js/script.js"></script>
   </body>
 </html>
