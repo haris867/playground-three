@@ -44,15 +44,52 @@ const segmentMaterial = new THREE.MeshBasicMaterial({
 });
 const segmentMesh = new THREE.Mesh(segmentGeometry, segmentMaterial);
 
-const anotherGeometry = new THREE.SphereGeometry(3, 64, 64);
+const anotherSphere = new THREE.SphereGeometry(2, 64, 64);
+const anotherGeometry = new THREE.TorusGeometry(3, 0.3, 124);
 const anotherMaterial = new THREE.MeshStandardMaterial({
   color: "#ff5733",
   roughness: 0.3,
   metalness: 0.6,
 });
 
-const anotherMesh = new THREE.Mesh(anotherGeometry, anotherMaterial);
-anotherMesh.position.set(10, 0, 0); // setting the position so it doesn't overlap with the existing sphere
+const anotherMesh = new THREE.Mesh(anotherSphere, anotherMaterial);
+const anotherShape = new THREE.Mesh(anotherGeometry, anotherMaterial);
+anotherMesh.position.set(10, 0, 0);
+anotherShape.position.set(10, 0, 0);
+anotherShape.rotation.x += 0.01;
+
+// Star shape
+
+const starShape = new THREE.Shape();
+
+let x = 0,
+  y = 0;
+starShape.moveTo(x + 1, y + 1);
+starShape.lineTo(x + 2, y + 5);
+starShape.lineTo(x + 5, y + 5);
+starShape.lineTo(x + 3, y + 7);
+starShape.lineTo(x + 4.6, y + 12);
+starShape.lineTo(x, y + 9);
+starShape.lineTo(x - 4.6, y + 12);
+starShape.lineTo(x - 3, y + 7);
+starShape.lineTo(x - 5, y + 5);
+starShape.lineTo(x - 2, y + 5);
+starShape.lineTo(x + 1, y + 1);
+
+const extrudeSettings = {
+  steps: 2,
+  depth: 10,
+  bevelEnabled: true,
+  bevelThickness: 1,
+  bevelSize: 1,
+  bevelOffset: 0,
+  bevelSegments: 1,
+};
+
+const extrudeGeometry = new THREE.ExtrudeGeometry(starShape, extrudeSettings);
+const starMesh = new THREE.Mesh(extrudeGeometry, material);
+
+starMesh.position.set(-10, -10, -10);
 
 // Create a group to hold both the main sphere and the image segment
 const group = new THREE.Group();
@@ -60,6 +97,8 @@ group.add(mesh);
 group.add(segmentMesh);
 scene.add(group);
 group.add(anotherMesh);
+group.add(anotherShape);
+group.add(starMesh);
 
 // Sizes
 const sizes = {
@@ -69,8 +108,10 @@ const sizes = {
 
 // Light
 const light = new THREE.PointLight(0xffffff, 200, 100);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.1, 100);
 light.position.set(10, 8, 15);
 scene.add(light);
+scene.add(ambientLight);
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
@@ -148,18 +189,16 @@ window.addEventListener("mousedown", handleIntersect);
 window.addEventListener("touchstart", handleIntersect);
 
 function addStars() {
-  const geometry = new THREE.SphereGeometry(0.1, 64, 64);
-  const material = new THREE.MeshStandardMaterial({
+  const geometry = new THREE.SphereGeometry(0.025, 64, 64);
+  const material = new THREE.MeshBasicMaterial({
     color: 0xffffff,
-    roughness: 0.2,
-    metalness: 0.2,
   });
 
   const star = new THREE.Mesh(geometry, material);
 
   const [x, y, z] = Array(3)
     .fill()
-    .map(() => THREE.MathUtils.randFloatSpread(100));
+    .map(() => THREE.MathUtils.randFloatSpread(30));
 
   star.position.set(x, y, z);
   scene.add(star);
@@ -169,6 +208,8 @@ Array(200).fill().forEach(addStars);
 
 const loop = () => {
   controls.update();
+  anotherShape.rotation.x += 0.01;
+  anotherShape.rotation.y += 0.01;
   renderer.render(scene, camera);
   window.requestAnimationFrame(loop);
 };
