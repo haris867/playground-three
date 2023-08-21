@@ -9,7 +9,7 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 
-const myTexture = new THREE.TextureLoader().load("/images/head5.png");
+const myTexture = new THREE.TextureLoader().load("/src/images/head5.png");
 
 const canvas = document.querySelector(".webgl");
 const renderer = new THREE.WebGLRenderer({ canvas });

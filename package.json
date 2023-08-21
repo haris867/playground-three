@@ -5,8 +5,8 @@
     "three": "^0.155.0"
   },
   "scripts": {
-    "build": "sass src/scss:src/css",
-    "watch": "sass --watch src/scss:src/css"
+    "build": "sass src/scss:dist/css",
+    "watch": "sass --watch src/scss:dist/css"
   },
   "devDependencies": {
     "sass": "^1.66.1",

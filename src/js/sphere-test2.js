@@ -7,7 +7,7 @@ const scene = new THREE.Scene();
 
 // Load texture
 const textureLoader = new THREE.TextureLoader();
-const myTexture = textureLoader.load("/images/head5.png");
+const myTexture = textureLoader.load("/src/images/head5.png");
 
 // Sphere
 const geometry = new THREE.SphereGeometry(3, 64, 64);
