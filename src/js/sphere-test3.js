@@ -112,10 +112,20 @@ window.addEventListener("resize", () => {
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
-window.addEventListener("mousedown", (event) => {
-  // Normalize mouse position between -1 and 1 for both axes
-  mouse.x = (event.clientX / sizes.width) * 2 - 1;
-  mouse.y = -(event.clientY / sizes.height) * 2 + 1;
+function handleIntersect(event) {
+  let clientX, clientY;
+
+  if (event.touches) {
+    clientX = event.touches[0].clientX;
+    clientY = event.touches[0].clientY;
+  } else {
+    clientX = event.clientX;
+    clientY = event.clientY;
+  }
+
+  // Normalize position between -1 and 1 for both axes
+  mouse.x = (clientX / sizes.width) * 2 - 1;
+  mouse.y = -(clientY / sizes.height) * 2 + 1;
 
   // Check for intersections
   raycaster.setFromCamera(mouse, camera);
@@ -135,7 +145,10 @@ window.addEventListener("mousedown", (event) => {
       duration: 0.5, // Duration for the tween back to original position, you can adjust
     });
   }
-});
+}
+
+window.addEventListener("mousedown", handleIntersect);
+window.addEventListener("touchstart", handleIntersect);
 
 function addStars() {
   const geometry = new THREE.SphereGeometry(0.1, 64, 64);
