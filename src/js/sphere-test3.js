@@ -1,13 +1,14 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import gsap from "gsap";
+import bigHead from "../images/head5.png";
 
 // Scene
 const scene = new THREE.Scene();
 
 // Load texture
 const textureLoader = new THREE.TextureLoader();
-const myTexture = textureLoader.load("/src/images/head5.png");
+const myTexture = textureLoader.load(bigHead);
 
 // Sphere
 const geometry = new THREE.SphereGeometry(3, 64, 64);

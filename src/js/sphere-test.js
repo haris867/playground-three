@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import gsap from "gsap";
+import bigHead from "../images/head5.png";
 
 // Scene
 
@@ -8,13 +9,10 @@ const scene = new THREE.Scene();
 
 // Load texture
 
-const myTexture = new THREE.TextureLoader().load(
-  "/src/images/head5.png",
-  function (texture) {
-    texture.generateMipmaps = false;
-    texture.minFilter = THREE.LinearFilter;
-  }
-);
+const myTexture = new THREE.TextureLoader().load(bigHead, function (texture) {
+  texture.generateMipmaps = false;
+  texture.minFilter = THREE.LinearFilter;
+});
 
 // Sphere
 
